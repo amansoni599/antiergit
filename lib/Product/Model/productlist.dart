@@ -61,8 +61,8 @@ class Products {
     title = json['title'];
     description = json['description'];
     price = json['price'];
-    discountPercentage = json['discountPercentage'];
-    rating = json['rating'];
+    // discountPercentage = json['discountPercentage'];
+    // rating = double.parse(json['rating']);
     stock = json['stock'];
     brand = json['brand'];
     category = json['category'];
