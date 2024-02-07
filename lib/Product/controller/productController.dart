@@ -45,13 +45,7 @@ class ProductController extends GetxController with StateMixin {
   String dropdownvalue = 'All';
 
   List<String> items = ["All"];
-  // var items = [
-  //   'Item 1',
-  //   'Item 2',
-  //   'Item 3',
-  //   'Item 4',
-  //   'Item 5',
-  // ];
+
   getDropDown() async {
     var res = await apiService.getDropDown(Endpoints.categoriesEndpoints);
     if (res != null) {
@@ -64,6 +58,7 @@ class ProductController extends GetxController with StateMixin {
   dropSelectedAll() async {
     change(null, status: RxStatus.loading());
     pagination = true;
+    list = [];
     await getProductList(0);
     change(null, status: RxStatus.success());
   }
