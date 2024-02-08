@@ -11,6 +11,7 @@ class CategroyText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
       child: Container(
+        width: MediaQuery.sizeOf(context).width,
         color: Colors.grey,
         child: Padding(
           padding: const EdgeInsets.all(8.0),

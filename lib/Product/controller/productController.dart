@@ -28,6 +28,8 @@ class ProductController extends GetxController with StateMixin {
   }
 
   getProductList(int skipvalue) async {
+    pagination = false;
+
     skipValueC = skipvalue;
     var res = await apiService
         .getProductList(Endpoints.productListEndpoint + skipvalue.toString());
@@ -35,6 +37,16 @@ class ProductController extends GetxController with StateMixin {
       productList = res;
       if (skipvalue == productList.total) {
         pagination = false;
+        // paginationLoader = false;
+        // if (widgetList.isNotEmpty) {
+        //   widgetList.removeLast();
+        // }
+        update();
+      } else {
+        pagination = true;
+        // paginationLoader = false;
+        // if (widgetList.isNotEmpty) widgetList.removeLast();
+        update();
       }
     }
     await productListToWidgetListConvert();

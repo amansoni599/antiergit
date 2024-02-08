@@ -4,11 +4,43 @@ import 'package:antiergit/Product/widgets/customTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductPage extends StatelessWidget {
-  ProductPage({super.key});
+class ProductPage extends StatefulWidget {
+  const ProductPage({super.key});
 
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
   var controller = Get.put(ProductController());
+
   TextEditingController searchController = TextEditingController();
+
+  ScrollController scrollController = ScrollController();
+  bool paginationLoader = false;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(addItems);
+  }
+
+  // @override
+  addItems() async {
+    scrollController.addListener(() async {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.position.pixels) {
+        if (controller.pagination == true) {
+          paginationLoader = true;
+          scrollController.jumpTo(scrollController.position.maxScrollExtent);
+          setState(() {});
+          await controller.getProductList(controller.skipValueC + 20);
+          paginationLoader = false;
+          setState(() {});
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,29 +112,26 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // TextField(
-                      //   controller: searchController,
-                      //   // onChanged: (value) {},
-                      //   onEditingComplete: () {},
-                      // ),
                       if (controller.searchLoading == false)
                         Expanded(
-                          child: ListView.builder(
-                              itemCount: controller.widgetList.length,
-                              itemBuilder: (context, index) {
-                                if (controller.pagination == true) {
-                                  if (controller.widgetList.length - 1 ==
-                                      index) {
-                                    controller.getProductList(
-                                        controller.skipValueC + 20);
-                                    // return const CircularProgressIndicator();
-                                  }
-                                }
-                                return controller.widgetList[index];
-                              }),
-                        ),
+                          child: SingleChildScrollView(
+                            controller: scrollController,
+                            child: Column(
+                              children: [
+                                ...controller.widgetList,
+                                if (paginationLoader == true)
+                                  const CircularProgressIndicator(),
+                              ],
+                            ),
+                          ),
+                        )
                     ],
                   ),
                 )));
+  }
+
+  Widget getloading() {
+    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+    return const CircularProgressIndicator();
   }
 }
