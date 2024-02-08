@@ -35,7 +35,7 @@ class ProductController extends GetxController with StateMixin {
         .getProductList(Endpoints.productListEndpoint + skipvalue.toString());
     if (res != null) {
       productList = res;
-      if (skipvalue == productList.total) {
+      if (skipvalue > productList.total!.toInt()) {
         pagination = false;
         // paginationLoader = false;
         // if (widgetList.isNotEmpty) {
