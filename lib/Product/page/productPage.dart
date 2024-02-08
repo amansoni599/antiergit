@@ -31,10 +31,11 @@ class _ProductPageState extends State<ProductPage> {
       if (scrollController.position.maxScrollExtent ==
           scrollController.position.pixels) {
         if (controller.pagination == true) {
-          paginationLoader = true;
-          scrollController.jumpTo(scrollController.position.maxScrollExtent);
-          setState(() {});
-          await controller.getProductList(controller.skipValueC + 20);
+          setState(() {
+            paginationLoader = true;
+            scrollController.jumpTo(scrollController.position.maxScrollExtent);
+          });
+          await controller.getProductList(controller.skipValueC + 7);
           paginationLoader = false;
           setState(() {});
         }
@@ -121,6 +122,9 @@ class _ProductPageState extends State<ProductPage> {
                                 ...controller.widgetList,
                                 if (paginationLoader == true)
                                   const CircularProgressIndicator(),
+                                const SizedBox(
+                                  height: 40,
+                                )
                               ],
                             ),
                           ),

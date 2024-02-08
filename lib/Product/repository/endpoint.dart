@@ -1,6 +1,6 @@
 class Endpoints {
   static String productListEndpoint =
-      "https://dummyjson.com/products?limit=20&skip=";
+      "https://dummyjson.com/products?limit=7&skip=";
   static String categoriesEndpoints =
       "https://dummyjson.com/products/categories";
   static String categoriesSearchEndppoint =
