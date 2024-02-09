@@ -18,6 +18,8 @@ class ProductController extends GetxController with StateMixin {
   int skipValueC = 0;
   bool pagination = true;
 
+  List<int> temp = [];
+
   @override
   void onInit() async {
     super.onInit();
@@ -90,29 +92,32 @@ class ProductController extends GetxController with StateMixin {
 
   productListToWidgetListConvert() {
     for (var i = 0; i < productList.products!.length; i++) {
-      bool contains = false;
-      for (var j = 0; j < list.length; j++) {
-        if (list[j].containsKey(productList.products![i].category)) {
-          contains = true;
-          list[j][productList.products![i].category]!
-              .add(productList.products![i]);
+      if (temp.contains(productList.products![i].id!) == false) {
+        temp.add(productList.products![i].id!);
+        bool contains = false;
+        for (var j = 0; j < list.length; j++) {
+          if (list[j].containsKey(productList.products![i].category)) {
+            contains = true;
+            list[j][productList.products![i].category]!
+                .add(productList.products![i]);
+          }
+        }
+        if (contains == false) {
+          list.add({
+            productList.products![i].category!: [productList.products![i]]
+          });
         }
       }
-      if (contains == false) {
-        list.add({
-          productList.products![i].category!: [productList.products![i]]
-        });
-      }
-    }
 
-    widgetList = [];
-    for (var i = 0; i < list.length; i++) {
-      widgetList.add(CategroyText(
-          title: list[i].keys.toString().split("(")[1].split(")")[0]));
+      widgetList = [];
+      for (var i = 0; i < list.length; i++) {
+        widgetList.add(CategroyText(
+            title: list[i].keys.toString().split("(")[1].split(")")[0]));
 
-      for (var element in list[i].values) {
-        for (var i = 0; i < element.length; i++) {
-          widgetList.add(ProductDetailsWidget(product: element[i]));
+        for (var element in list[i].values) {
+          for (var i = 0; i < element.length; i++) {
+            widgetList.add(ProductDetailsWidget(product: element[i]));
+          }
         }
       }
 

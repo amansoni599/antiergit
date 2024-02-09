@@ -33,7 +33,7 @@ class _ProductPageState extends State<ProductPage> {
         if (controller.pagination == true) {
           setState(() {
             paginationLoader = true;
-            scrollController.jumpTo(scrollController.position.maxScrollExtent);
+            // scrollController.jumpTo(scrollController.position.maxScrollExtent);
           });
           await controller.getProductList(controller.skipValueC + 7);
           paginationLoader = false;

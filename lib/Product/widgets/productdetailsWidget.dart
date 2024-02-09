@@ -27,6 +27,7 @@ class ProductDetailsWidget extends StatelessWidget {
               width: 100,
               alignment: Alignment.topLeft,
               height: 80,
+              fit: BoxFit.fill,
             ),
             const SizedBox(
               width: 20,
@@ -94,6 +95,7 @@ getDailogForAgree(BuildContext context, Products product) {
                                   product.images![index],
                                   height: 100,
                                   width: 100,
+                                  fit: BoxFit.fill,
                                 ),
                               );
                             },
