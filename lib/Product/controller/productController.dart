@@ -70,6 +70,7 @@ class ProductController extends GetxController with StateMixin {
   }
 
   dropSelectedAll() async {
+    temp = [];
     change(null, status: RxStatus.loading());
     pagination = true;
     list = [];
@@ -78,6 +79,7 @@ class ProductController extends GetxController with StateMixin {
   }
 
   dropSelectOtherOption(String category) async {
+    temp = [];
     change(null, status: RxStatus.loading());
     var res = await apiService
         .getProductList(Endpoints.categoriesSearchEndppoint + category);
@@ -129,6 +131,7 @@ class ProductController extends GetxController with StateMixin {
 
   bool searchLoading = false;
   searchProduct(String searchText) async {
+    temp = [];
     searchLoading = true;
     // change(null, status: RxStatus.loading());
     var res =
