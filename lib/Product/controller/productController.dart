@@ -41,12 +41,12 @@ class ProductController extends GetxController with StateMixin {
         // if (widgetList.isNotEmpty) {
         //   widgetList.removeLast();
         // }
-        update();
+        // update();
       } else {
         pagination = true;
         // paginationLoader = false;
         // if (widgetList.isNotEmpty) widgetList.removeLast();
-        update();
+        // update();
       }
     }
     await productListToWidgetListConvert();

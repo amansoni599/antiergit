@@ -13,43 +13,46 @@ class ProductDetailsWidget extends StatelessWidget {
       onTap: () {
         getDailogForAgree(context, product);
       },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SizedBox(
-            width: 10,
-          ),
-          Image.network(
-            product.thumbnail ?? "",
-            width: 100,
-            alignment: Alignment.topLeft,
-            height: 80,
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 150,
-                child: CustomAutoSizeTextMontserrat(
-                  text: product.title,
-                  fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20, bottom: 20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              width: 10,
+            ),
+            Image.network(
+              product.thumbnail ?? "",
+              width: 100,
+              alignment: Alignment.topLeft,
+              height: 80,
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 150,
+                  child: CustomAutoSizeTextMontserrat(
+                    text: product.title,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 150,
-                child: CustomAutoSizeTextMontserrat(
-                  text: product.description,
-                  maxLines: 10,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 150,
+                  child: CustomAutoSizeTextMontserrat(
+                    text: product.description,
+                    maxLines: 10,
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
